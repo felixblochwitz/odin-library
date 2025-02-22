@@ -1,18 +1,24 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="style.css" rel="stylesheet" />
+    <script src="script.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title></title>
-  <link href="style.css" rel="stylesheet" />
-  <script src="script.js" defer></script>
-</head>
-
-<body>
-  <header>The Library</header>
-  <div class="bookshelf">
-  </div>
-</body>
-
+  <body>
+    <header>The Library</header>
+    <div class="bookshelf"></div>
+  </body>
+  <dialog id="book-details">
+    <form action="">
+      <p id="title"></p>
+      <p id="author"></p>
+      <p id="pages"></p>
+      <p id="readStatus"></p>
+      <button>Close</button>
+    </form>
+  </dialog>
 </html>
