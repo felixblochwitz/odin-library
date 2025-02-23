@@ -28,12 +28,21 @@ function addBookToLibrary(title, author, pages, readStatus, lib) {
 
 function createBookDiv(book, index) {
   const bookDiv = document.createElement("div");
+  const btnDiv = document.createElement("div");
   const removeBtn = document.createElement("button");
+  const toggleReadStatusBtn = document.createElement("button");
   bookDiv.className = "book";
   bookDiv.textContent = book.title;
   bookDiv.dataset.index = index;
+  btnDiv.className = "book-div-btns";
+  toggleReadStatusBtn.textContent = "Read";
   removeBtn.textContent = "Remove";
-  bookDiv.appendChild(removeBtn);
+  btnDiv.appendChild(toggleReadStatusBtn);
+  btnDiv.appendChild(removeBtn);
+  bookDiv.appendChild(btnDiv);
+  toggleReadStatusBtn.addEventListener("click", () => {
+    myLibrary[index].toggleReadStatus();
+  });
   removeBtn.addEventListener("click", (target) => {
     remmoveBook(bookDiv, bookDiv.dataset.index);
   });
