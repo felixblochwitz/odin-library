@@ -1,48 +1,92 @@
-const myLibrary = [];
+const myLibrary = [null, null];
 const bookDivs = [];
+const bookshelf = document.querySelector(".bookshelf");
 const bookDetails = document.getElementById("book-details");
+const bookDetailsForm = document.querySelector("#book-details form");
 const title = document.getElementById("title");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
 const readStatus = document.getElementById("readStatus");
+const addBookBtn = document.getElementById("add-book-btn");
+const addBook = document.getElementById("add-book");
+const addBookForm = document.querySelector("#add-book form");
 
-function Book(title, author, publisher, pages, language, readStatus) {
+function Book(title, author, pages, readStatus) {
   this.title = title;
   this.author = author;
-  this.publisher = publisher;
   this.pages = pages;
-  this.language = language;
   this.readStatus = readStatus;
 }
 
-function addBookToLibrary(
-  title,
-  author,
-  publisher,
-  pages,
-  language,
-  readStatus,
-  lib,
-) {
-  lib.push(new Book(title, author, publisher, pages, language, readStatus));
+function addBookToLibrary(title, author, pages, readStatus, lib) {
+  lib.push(new Book(title, author, pages, readStatus));
 }
 
-addBookToLibrary(
-  "The Blade itself",
-  "Joe Abercrombie",
-  "Orion",
-  536,
-  "English",
-  true,
-  myLibrary,
-);
+function createBookDiv(book, index) {
+  const bookDiv = document.createElement("div");
+  const removeBtn = document.createElement("button");
+  bookDiv.className = "book";
+  bookDiv.textContent = book.title;
+  bookDiv.dataset.index = index;
+  removeBtn.textContent = "Remove";
+  bookDiv.appendChild(removeBtn);
+  removeBtn.addEventListener("click", (target) => {
+    remmoveBook(bookDiv, bookDiv.dataset.index);
+  });
+  return bookDiv;
+}
+
+function addBookDivListener(bookDiv, book) {
+  bookDiv.addEventListener("click", (target) => {
+    if (target.target.nodeName != "BUTTON") {
+      title.textContent = `Title: ${book.title}`;
+      author.textContent = `Author: ${book.author}`;
+      pages.textContent = `Pages: ${book.pages}`;
+      readStatus.textContent = `Already read: ${book.readStatus ? "\u2705" : "\u274c"}`;
+      bookDetails.showModal();
+    }
+  });
+}
+
+function showBooksOnPage(lib) {
+  lib.forEach((book, index) => {
+    if (book != null) {
+      const bookDiv = createBookDiv(book, index);
+      addBookDivListener(bookDiv, book);
+      bookshelf.appendChild(bookDiv);
+    }
+  });
+}
+
+function showNewBookOnPage(lib) {
+  const bookDiv = createBookDiv(
+    lib.slice(-1)[0],
+    lib.indexOf(lib.slice(-1)[0]),
+  );
+  addBookDivListener(bookDiv, lib.slice(-1)[0]);
+  bookshelf.appendChild(bookDiv);
+}
+
+function remmoveBook(bookDiv, index) {
+  removeBookFromLib(index);
+  removeBookFromPage(bookDiv);
+  console.log(myLibrary);
+}
+
+function removeBookFromLib(index) {
+  myLibrary[index] = null;
+}
+
+function removeBookFromPage(bookDiv) {
+  bookshelf.removeChild(bookDiv);
+}
+
+addBookToLibrary("The Blade itself", "Joe Abercrombie", 536, true, myLibrary);
 
 addBookToLibrary(
   "Before They Are Hanged",
   "Joe Abercrombie",
-  "Orion",
   570,
-  "English",
   true,
   myLibrary,
 );
@@ -50,34 +94,32 @@ addBookToLibrary(
 addBookToLibrary(
   "Last Argument of Kings",
   "Joe Abercrombie",
-  "Orion",
   660,
-  "English",
   false,
   myLibrary,
 );
 
-function showBooksOnPage(lib) {
-  const bookshelf = document.querySelector(".bookshelf");
-  console.log(bookshelf);
-  lib.forEach((book) => {
-    const bookDiv = document.createElement("div");
-    bookDiv.className = "book";
-    bookDiv.textContent = book.title;
-    bookshelf.appendChild(bookDiv);
-    bookDivs.push(bookDiv);
-  });
-}
-
 showBooksOnPage(myLibrary);
 
-bookDivs.forEach((x, i) => {
-  const book = myLibrary[i];
-  x.addEventListener("click", () => {
-    title.textContent = `Title: ${book.title}`;
-    author.textContent = `Author: ${book.author}`;
-    pages.textContent = `Pages: ${book.pages}`;
-    readStatus.textContent = `Already read: ${book.readStatus ? "\u2705" : "\u274c"}`;
-    bookDetails.showModal();
-  });
+bookDetailsForm.addEventListener("submit", (target) => {
+  target.preventDefault();
+  bookDetails.close();
+});
+
+addBookBtn.addEventListener("click", () => {
+  addBook.showModal();
+});
+
+addBookForm.addEventListener("submit", (target) => {
+  target.preventDefault();
+  const formData = new FormData(addBookForm);
+  addBook.close();
+  addBookToLibrary(
+    formData.get("title"),
+    formData.get("author"),
+    formData.get("pages"),
+    formData.get("readStatus") ? true : false,
+    myLibrary,
+  );
+  showNewBookOnPage(myLibrary);
 });

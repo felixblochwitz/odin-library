@@ -5,16 +5,33 @@ body {
 }
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: #fcfaf8;
   font-weight: bold;
   font-size: 2.5em;
-  text-align: center;
   background-color: #825445;
+  padding: 0 1em;
+}
+
+#add-book-btn {
+  display: flex;
+}
+
+#add-book-btn button {
+  background-color: #f4f1ea;
+  color: #825445;
+  font-weight: bold;
+  font-size: 0.5em;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.25em 0.5em;
 }
 
 .bookshelf {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
   margin: 5em 15%;
 }
 
@@ -24,12 +41,16 @@ header {
   margin: 1em;
   border-radius: 0.5em;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: center;
   font-size: 1.5em;
   padding: 0.5em;
   box-shadow: 1px 1px 5px #00000059;
+}
+
+.book button {
+  justify-self: flex-end;
 }
 
 dialog {
@@ -40,4 +61,47 @@ dialog {
 dialog button {
   display: block;
   margin: auto;
+}
+
+#add-book {
+  color: #754b3e;
+  background-color: #f4f1ea;
+  font-size: 1.25em;
+}
+
+#add-book * {
+  margin: 0.25em 0;
+}
+
+#add-book .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+#add-book .form-group.read-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#add-book .form-group.submit {
+  justify-content: center;
+}
+
+#add-book button {
+  background-color: #754b3e;
+  color: #f4f1ea;
+  font-weight: bold;
+  font-size: 1.1em;
+  justify-self: center;
+  align-self: center;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.25em 0.5em;
+}
+
+#add-book input {
+  border: none;
+  font-size: 1.1em;
 }

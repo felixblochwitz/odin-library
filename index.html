@@ -1,24 +1,54 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title></title>
-    <link href="style.css" rel="stylesheet" />
-    <script src="script.js" defer></script>
-  </head>
 
-  <body>
-    <header>The Library</header>
-    <div class="bookshelf"></div>
-  </body>
-  <dialog id="book-details">
-    <form action="">
-      <p id="title"></p>
-      <p id="author"></p>
-      <p id="pages"></p>
-      <p id="readStatus"></p>
-      <button>Close</button>
-    </form>
-  </dialog>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <div>The Library</div>
+    <div id="add-book-btn">
+      <button>Add Book</button>
+    </div>
+  </header>
+  <div class="bookshelf"></div>
+</body>
+<dialog id="book-details">
+  <form action="">
+    <p id="title"></p>
+    <p id="author"></p>
+    <p id="pages"></p>
+    <p id="readStatus"></p>
+    <button>Close</button>
+  </form>
+</dialog>
+<dialog id="add-book">
+  <form action="">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" name="title" value="" />
+    </div>
+    <div class="form-group">
+      <label for="title">Author</label>
+      <input type="text" name="author" value="" />
+    </div>
+    <div class="form-group">
+      <label for="title">Pages</label>
+      <input type="number" name="pages" value="" />
+    </div>
+    <div class="form-group read-status">
+      <label for="readStatus">Already read?</label>
+      <input type="checkbox" name="readStatus" value="" />
+    </div>
+    <div class="form-group submit">
+      <button>Add</button>
+    </div>
+  </form>
+</dialog>
+
 </html>
