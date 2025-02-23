@@ -18,6 +18,10 @@ function Book(title, author, pages, readStatus) {
   this.readStatus = readStatus;
 }
 
+Book.prototype.toggleReadStatus = function () {
+  this.readStatus = this.readStatus ? false : true;
+};
+
 function addBookToLibrary(title, author, pages, readStatus, lib) {
   lib.push(new Book(title, author, pages, readStatus));
 }
