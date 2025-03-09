@@ -11,16 +11,17 @@ const addBookBtn = document.getElementById("add-book-btn");
 const addBook = document.getElementById("add-book");
 const addBookForm = document.querySelector("#add-book form");
 
-function Book(title, author, pages, readStatus) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.readStatus = readStatus;
+class Book {
+  constructor(title, author, pages, readStatus) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readStatus = readStatus;
+  }
+  toggleReadStatus() {
+    this.readStatus = this.readStatus ? false : true;
+  }
 }
-
-Book.prototype.toggleReadStatus = function () {
-  this.readStatus = this.readStatus ? false : true;
-};
 
 function addBookToLibrary(title, author, pages, readStatus, lib) {
   lib.push(new Book(title, author, pages, readStatus));
